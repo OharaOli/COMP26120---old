@@ -11,23 +11,37 @@ See COMPjudge for the full instructions.
 
 =========================================
 Problem Set 1
-Chosen Problem is X
+Chosen Problem is A
 
 ===================
 Algorithm 1
 ------------
 1) Pseudocode
 
+found = false
 
+for i = 0 to n
+  if A[i] = i
+     found = true
+     return i
+
+if found = false
+   return "No"
 
 ------------
 2) Correctness Explanation
 
-
+Assuming that we don't have i in the array such that A[i] = i then found will remain as false
+and so the return will be false
+Assuming that we do have i in the array such that A[i] = i then found will be change to true and
+so the value will be return and "No" won't be returned
 
 ------------
 3) Worst Case Complexity Analysis
 
+Due to being a "brute force" approach, there is always a chance that the value that we are
+looking for is in the final place in the array, meaning that we will would need to search the
+entire length of the array before finishing. O(n)
 
 
 ===================
@@ -35,53 +49,96 @@ Algorithm 2
 ------------
 1) Pseudocode
 
+(Array already in order)
+Set "lower" to the bottom of the list
+Set "upper" to the top of the list
+found = false
+while lower <= upper and found = false 
+  middle = (lower + upper)/2
+  if A[middle] = middle
+     found = true
+     return middle
+  else if A[middle] < middle
+     lower = middle
+  else
+     upper = middle
 
+if found = false
+  return "No"
 
 ------------
 2) Correctness Explanation
 
-
+Assuming that we don't have i in the array such that A[i] = i then found will remain as false
+and eventually lower will become equal to upper and so the while loop will terminate
+Assuming that we do have i in the array such that A[i] = i then the upper and lower pointers
+will move towards the target value (i), with it eventually becoming the middle value at which
+point the if statement will be triggered and found will be set to true (causing the while to 
+terminate) and the value to be returned
 
 ------------
 3) Worst Case Complexity Analysis
 
+Worst case situation occurs with a value of i that doesn't exist whilst being in a position
+that requires the upper and lower pointers to be moved to a point where they meet. Even in this
+situation the array will be continuously halved. O(log n)
 
 
 =========================================
 Problem Set 2
-Chosen Problem is X
+Chosen Problem is E (Assuming that "Without Replacement" refers to not having repeat values)
 
 ===================
 Algorithm 1
 ------------
 1) Pseudocode
 
+B[]
+
+for i = 0 to k
+   value = A[randomint(0, A.len)]
+   while value is present in B
+      value = A[randomint(0, A.len)]
+   Add value to array B
+
+print array B
 
 
 ------------
 2) Correctness Explanation
 
-
+The while loop present within the for loop ensures that each value that is to be added to the array
+B hasn't already been added, making them unique. 
 
 ------------
 3) Worst Case Complexity Analysis
 
-
+In the worst case this algorithm will constantly pick the same index meaning that value will be added
+once and then remain the same meaning that it cant be added. O(infinite)
 
 ===================
 Algorithm 2
 ------------
 1) Pseudocode
 
+B[]
 
+for i = 0 to k
+   index = randomint(0, A.len)
+   Add A[index] to B
+   Pop A[index]
+
+print array B
 
 ------------
 2) Correctness Explanation
 
-
+By popping the value at the index we have created we ensure that it cant be repeated again in the new
+array B
 
 ------------
 3) Worst Case Complexity Analysis
 
-
+Worst case is fairly simple with this algorithm as the only thing that will effect complexity is 
+the value of k (the number of items that will be popped). O(n)
 ~                                       
