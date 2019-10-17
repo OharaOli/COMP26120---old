@@ -26,10 +26,10 @@ int main(int argc, char **argv)
   FILE *out;
 
   strcat(inFileName, inputString);
-  strcat(inFileName, ".txt");
+  //strcat(inFileName, ".txt");
 
   strcat(outFileName, outputString);
-  strcat(outFileName, ".txt");
+  //strcat(outFileName, ".txt");
 
   //Open the files as read and write files
   in = fopen(inFileName, "r");
