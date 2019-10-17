@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv)
 {
-  printf("Part 1\n");
+  //printf("Part 1\n");
   //Basis for the input and output file names
   //char inFileName[100] = "./";
   //char outFileName[100] = "./";
@@ -67,8 +67,8 @@ int main(int argc, char **argv)
   }
 
   //Print the converted word to the standard output and write it to the file
-  printf("\nConverted word: ");
-  puts(string);
+  //printf("\nConverted word: ");
+  //puts(string);
   fprintf(out, string);
 
   //Ouput the information regarding the change string to the standard output
@@ -78,5 +78,5 @@ int main(int argc, char **argv)
   //Close the files that we have used
   fclose(in);
   fclose(out);
-  printf("\nEnd of Part 1\n");
+  //printf("\nEnd of Part 1\n");
 }
