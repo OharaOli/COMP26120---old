@@ -5,8 +5,10 @@ int main(int argc, char **argv)
 {
   printf("Part 1\n");
   //Basis for the input and output file names
-  char inFileName[100] = "./";
-  char outFileName[100] = "./";
+  //char inFileName[100] = "./";
+  //char outFileName[100] = "./";
+  char inFileName[100] = "";
+  char outFileName[100] = "";
   //Variable to hold the string found in the input file
   char string[100];
   //Variables to hold the strings that the user inputs for the files
