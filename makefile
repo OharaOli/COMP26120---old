@@ -17,8 +17,8 @@ test2b:
 	./part2b "-c" "fifty" && exit 3 || [ $$? -eq 3 ]
 	./part2b "-g" "fifty" && exit 2 || [ $$? -eq 2 ]
 	./part2b "-c" "-275" && exit 4 || [ $$? -eq 4 ]
-	./part2b "-f" "-35" && exit 4 || [ $$? -eq 4 ]
+	./part2b "-f" "-470" && exit 4 || [ $$? -eq 4 ]
 	./part2b "-c" "-273.15"
-	./part2b "-f" "0"
+	./part2b "-f" "-459"
 	./part2b "-c" "10"
 	./part2b "-f" "50"

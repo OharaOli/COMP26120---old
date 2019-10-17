@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     float temperature;
 
     //Check for an incorrect number of inputs
-    if(argc == 1 || argc > 3) 
+    if(argc <= 2 || argc > 3) 
     {
         printf("Error: The wrong number of parameters have been supplies\n");
         return 1;
@@ -32,6 +32,7 @@ int main(int argc, char *argv[]) {
         return 2;
     }
     //Check that the number given is a valid float
+    //else if(sscanf(argv[2], "%f%*[^\n]", &temperature) != 1)
     else if(sscanf(argv[2], "%f", &temperature) != 1)
     {
         printf("Error: Input is not a valid float\n");
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
     else if(strcmp (argv[1],"-f") == 0)
     {
         //Error if the temperature is below absolute zero
-        if(temperature < 0)
+        if(temperature < -459.67)
         {
             printf("Error: Temperature below absolute zero\n");
             return 4;
