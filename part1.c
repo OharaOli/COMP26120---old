@@ -16,9 +16,9 @@ int main(int argc, char **argv)
   char outputString[100];
 
   //Get the names that the user would like to use for the files
-  printf("Please enter the file that you want to read from: ");
+  //printf("Please enter the file that you want to read from: ");
   gets(inputString);
-  printf("Please enter the file that you want to write to: ");
+  //printf("Please enter the file that you want to write to: ");
   gets(outputString);
   
   //Create the files by using the directory, file name and .txt
