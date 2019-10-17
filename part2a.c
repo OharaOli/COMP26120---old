@@ -35,7 +35,8 @@ int main(int argc, char *argv[]) {
     //Print the length of the longest argument and what word it relates to
     if(error == 0)
     {
-       printf("Max length is %d for string: %s\n", longestLength, argv[longestPos]);
+       //printf("Max length is %d for string: %s\n", longestLength, argv[longestPos]);
+       printf("%s\n", argv[longestPos]);
     }
 }
 
