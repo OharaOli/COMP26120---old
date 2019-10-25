@@ -1,0 +1,69 @@
+Error fixing for broken.c...
+
+
+
+Compiled and ran broken.c, leading to a Segmentation fault.
+
+Ran the program through ddd:
+Error on the line  " for(int i=0;i<=strlen(work.first)+1;i++){ "
+Suggested problem references " strlen "
+
+Ran the program through valgrind:
+Error on the line " for(int i=0;i<=strlen(work.first)+1;i++){ "
+Suggested problem references " Invalid read of size 1 "
+Additional information " Access not within mapped region at address 0x0 "
+
+Ran the program through gdb:
+Backtrace..	#0  0x00007ffff7ab0716 in __strcpy_sse2_unaligned () from /lib64/libc.so.6
+		#1  0x00000000004007a5 in process (work=...) at broken.c:30
+		#2  0x000000000040082f in main (argc=2, argv=0x7fffffffdc98) at broken.c:47
+
+Running through gdb exposed an error on line 30, most likely the use of work.second without 
+allocation. Assigning the pointer second to the argument in the same way we do first fixes
+the current segmentation fault.
+
+Input:  ./broken test
+Output: tEst becomes tEst
+
+Input:  ./broken TESt
+Output: tEst becomes tEst
+
+Changed the fix so that now instead of the pointer pointing to the argument that the first
+pointer points to, it is now allocated memory using malloc.
+
+Input:  ./broken test
+Output: test becomes (null)
+
+Input:  ./broken TESt
+Output: test becomes (null)
+
+Due to its success from this point on I will use gdb
+
+The issue of the input being converted to lower case when displayed is caused by the pointer
+"temp" pointing to the same place as pointer "first" and so any change will effect what we
+store as an input.
+
+To fix this we can allocate another part of memory that temp will point to.
+
+The second issue (the output showing as NULL) is due to the fact that the function is being
+passed by value rather than reference.
+
+To fix this we can pass the parameters by reference so that the changes take effect outside
+the function.
+
+The next change involves checking if the character previous to the one that we are looking
+at is a space (to check if we are at the start of a new word). This involved changing the
+checked value of last space to 0. The pointer is initially set to upper case (for the first
+letter) and then set to upper case again everytime we see a space.
+
+Ran the program through valgrind to check for leaks and found 2 memory allocations that
+weren't freed. 
+
+Finished by freeing the allocated memory and confirming that there are no longer any more
+leaks (again using valgrind).
+
+
+
+
+
+
