@@ -43,10 +43,11 @@ int main(int argc, char **argv)
   /* print the people array here*/
   for(int j = 0; j < HOW_MANY; j++)
   {
-    printf("Person %d:\n", j + 1);
-    printf("Name: %s\n", people[j]->name);
-    printf("Age: %d\n", people[j]->age);
-    printf("\n");
+    //printf("Person %d:\n", j + 1);
+    //printf("Name: %s\n", people[j]->name);
+    //printf("Age: %d\n", people[j]->age);
+    //printf("\n");
+    printf("%d: %s is %d\n", j, people[j]->name, people[j]->age);
   }
 
   //Free the allocated memory
