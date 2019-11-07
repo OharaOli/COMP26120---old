@@ -57,7 +57,7 @@ int main(int argc, char **argv)
   struct person* temp_start;
   for(j = 0; j < HOW_MANY; j++)
   {
-    printf("%d: %s is %d\n", j + 1, start->name, start->age);
+    printf("Name: %s, age: %d\n", start->name, start->age);
     temp_start = start;
     start = start->next;
     free(temp_start);
