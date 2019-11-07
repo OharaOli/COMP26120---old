@@ -12,6 +12,7 @@ typedef struct person {
 } person;
 
 char **g_argv;
+int g_argc;
 
 //Insert the information about a person to the start of the list
 static person* insert_start(struct person** start, char *name, int age)
@@ -98,7 +99,7 @@ static person* insert_sorted(struct person** start, char *name, int age)
 
   struct person* current_person = start;
 
-  if(strcmp (g_argv[2],"name") == 0)
+  if(g_argc == 2 || (strcmp (g_argv[2],"name") == 0))
   {
     if(current_person == NULL || (strcmp(name, current_person->name)) <= 0)
     {
@@ -145,6 +146,7 @@ static person* insert_sorted(struct person** start, char *name, int age)
 int main(int argc, char **argv)
 {
   g_argv = argv;
+  g_argc = argc;
 
   //Declare an array of people
   person* start = NULL;
@@ -164,6 +166,14 @@ int main(int argc, char **argv)
     for(i = 0; i < HOW_MANY; i++)
     {
       start = (insert_end (start, names[i], ages[i]));
+    }
+  }
+  else if(argc == 2 && strcmp (argv[1],"insert_sorted") == 0)
+  {
+    int i;
+    for(i = 0; i < HOW_MANY; i++)
+    {
+      start = (insert_sorted (start, names[i], ages[i]));
     }
   }
   else if(argc == 3 && strcmp (argv[1],"insert_sorted") == 0 
