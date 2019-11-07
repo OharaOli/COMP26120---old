@@ -11,9 +11,8 @@ typedef struct person {
   struct person* next;
 } person;
 
-//Insert the information about a person to the person pointed to in the
-//next free place
-static person* insert(struct person** start, char *name, int age)
+//Insert the information about a person to the start of the list
+static person* insert_start(struct person** start, char *name, int age)
 {
   //Allocate a pointer at the next free place and check that it is done
   //correctly
@@ -34,22 +33,73 @@ static person* insert(struct person** start, char *name, int age)
   return start;
 }
 
-int main(int argc, char **argv)
+
+
+//Insert the information about a person at the end of the list
+static person* insert_end(struct person** start, char *name, int age)
 {
-  //Declare an array of people
-  person* start = NULL;
-  start = malloc(sizeof(person));
-  if(start == NULL)
+  //Allocate a pointer at the next free place and check that it is done
+  //correctly
+  struct person* new_person;
+  new_person = malloc(sizeof(person));
+  if(new_person == NULL)
   {
     printf("Memory allocation failed");
     return;
   }
 
-  //Insert the names and ages from arrays.h
-  int i;
-  for(i = 0; i < HOW_MANY; i++)
+  //Puts name and age at this pointer
+  new_person->name = name;
+  new_person->age = age;
+  new_person->next = NULL;
+
+  struct person* current_person = start;
+
+  if(current_person == NULL)
   {
-    start = (insert (start, names[i], ages[i]));
+    start = new_person;
+    return start;
+  }
+  else
+  {
+  while(current_person->next != NULL)
+  {
+    current_person = current_person->next;
+  }
+  current_person->next = new_person;
+  return start;
+  }
+}
+
+
+
+//main
+int main(int argc, char **argv)
+{
+  //Declare an array of people
+  person* start = NULL;
+
+  //Insert the names and ages based on arguments
+  if(argc == 1 || strcmp (argv[1],"insert_start") == 0)
+  {
+    int i;
+    for(i = 0; i < HOW_MANY; i++)
+    {
+      start = (insert_start (start, names[i], ages[i]));
+    }
+  }
+  else if(strcmp (argv[1],"insert_end") == 0)
+  {
+    int i;
+    for(i = 0; i < HOW_MANY; i++)
+    {
+      start = (insert_end (start, names[i], ages[i]));
+    }
+  }
+  else
+  {
+    printf("Error: Unexpected arguments\n");
+    return 2;
   }
 
   //Print the people array and free the memory
