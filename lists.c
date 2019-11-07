@@ -11,6 +11,8 @@ typedef struct person {
   struct person* next;
 } person;
 
+char **g_argv;
+
 //Insert the information about a person to the start of the list
 static person* insert_start(struct person** start, char *name, int age)
 {
@@ -71,11 +73,79 @@ static person* insert_end(struct person** start, char *name, int age)
   }
 }
 
+//static int compare_people(struct person** person_one, struct person** person_two)
+//{
+//  return strcmp(person_two->name, person_two->name);
+//}
+
+
+//Insert the information about a person in the order of the list
+static person* insert_sorted(struct person** start, char *name, int age)
+{
+  //Allocate a pointer at the next free place and check that it is done
+  //correctly
+  struct person* new_person;
+  new_person = malloc(sizeof(person));
+  if(new_person == NULL)
+  {
+    printf("Memory allocation failed");
+    return;
+  }
+
+  //Puts name and age at this pointer
+  new_person->name = name;
+  new_person->age = age;
+
+  struct person* current_person = start;
+
+  if(strcmp (g_argv[2],"name") == 0)
+  {
+    if(current_person == NULL || (strcmp(name, current_person->name)) <= 0)
+    {
+      new_person->next = start;
+      start = new_person;
+      return start;
+    }
+    else
+    {                      
+      while(current_person->next != NULL && (strcmp(name, current_person->next->name)) >= 0)
+      {
+        current_person = current_person->next; 
+      }
+  
+    new_person->next = current_person->next;
+    current_person->next = new_person;
+    return start;
+    }
+  }
+  else
+  {
+    if(current_person == NULL || age < current_person->age)
+    {
+      new_person->next = start;
+      start = new_person;
+      return start;
+    }
+    else
+    {                      
+      while(current_person->next != NULL && age > current_person->next->age)
+      {
+        current_person = current_person->next; 
+      }
+  
+    new_person->next = current_person->next;
+    current_person->next = new_person;
+    return start;
+    }
+  }
+}
 
 
 //main
 int main(int argc, char **argv)
 {
+  g_argv = argv;
+
   //Declare an array of people
   person* start = NULL;
 
@@ -94,6 +164,15 @@ int main(int argc, char **argv)
     for(i = 0; i < HOW_MANY; i++)
     {
       start = (insert_end (start, names[i], ages[i]));
+    }
+  }
+  else if(argc == 3 && strcmp (argv[1],"insert_sorted") == 0 
+          && (strcmp (argv[2],"name") == 0 || strcmp (argv[2],"age") == 0))
+  {
+    int i;
+    for(i = 0; i < HOW_MANY; i++)
+    {
+      start = (insert_sorted (start, names[i], ages[i]));
     }
   }
   else
