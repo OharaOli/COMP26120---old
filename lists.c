@@ -88,7 +88,7 @@ int main(int argc, char **argv)
       start = (insert_start (start, names[i], ages[i]));
     }
   }
-  else if(strcmp (argv[1],"insert_end") == 0)
+  else if(argc == 2 && strcmp (argv[1],"insert_end") == 0)
   {
     int i;
     for(i = 0; i < HOW_MANY; i++)
