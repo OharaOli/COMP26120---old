@@ -17,8 +17,7 @@ int g_argc;
 //Insert the information about a person to the start of the list
 static person* insert_start(struct person** start, char *name, int age)
 {
-  //Allocate a pointer at the next free place and check that it is done
-  //correctly
+  //Allocate a pointer for the new person and check it works correctly
   struct person* new_person;
   new_person = malloc(sizeof(person));
   if(new_person == NULL)
@@ -32,6 +31,7 @@ static person* insert_start(struct person** start, char *name, int age)
   new_person->age = age;
   new_person->next = start;
 
+  //Puts this pointer at the start of the list
   start = new_person;
   return start;
 }
@@ -41,8 +41,7 @@ static person* insert_start(struct person** start, char *name, int age)
 //Insert the information about a person at the end of the list
 static person* insert_end(struct person** start, char *name, int age)
 {
-  //Allocate a pointer at the next free place and check that it is done
-  //correctly
+  //Allocate a pointer for the new person and check it works correctly
   struct person* new_person;
   new_person = malloc(sizeof(person));
   if(new_person == NULL)
@@ -56,8 +55,10 @@ static person* insert_end(struct person** start, char *name, int age)
   new_person->age = age;
   new_person->next = NULL;
 
+  //Create another point to the person at the end of the list
   struct person* current_person = start;
 
+  //Check for an empty list and then for the next null pointer
   if(current_person == NULL)
   {
     start = new_person;
@@ -65,26 +66,20 @@ static person* insert_end(struct person** start, char *name, int age)
   }
   else
   {
-  while(current_person->next != NULL)
-  {
-    current_person = current_person->next;
-  }
-  current_person->next = new_person;
-  return start;
+    while(current_person->next != NULL)
+    {
+      current_person = current_person->next;
+    }
+    current_person->next = new_person;
+    return start;
   }
 }
-
-//static int compare_people(struct person** person_one, struct person** person_two)
-//{
-//  return strcmp(person_two->name, person_two->name);
-//}
 
 
 //Insert the information about a person in the order of the list
 static person* insert_sorted(struct person** start, char *name, int age)
 {
-  //Allocate a pointer at the next free place and check that it is done
-  //correctly
+  //Allocate a pointer for the new person and check it works correctly
   struct person* new_person;
   new_person = malloc(sizeof(person));
   if(new_person == NULL)
@@ -97,8 +92,10 @@ static person* insert_sorted(struct person** start, char *name, int age)
   new_person->name = name;
   new_person->age = age;
 
+  //Creates a pointer that will point to the comparable person
   struct person* current_person = start;
 
+  //Order the list by either name or age based on the arguments given
   if(g_argc == 2 || (strcmp (g_argv[2],"name") == 0))
   {
     if(current_person == NULL || (strcmp(name, current_person->name)) <= 0)
