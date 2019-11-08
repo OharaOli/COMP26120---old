@@ -118,7 +118,7 @@ static person* insert_sorted(struct person** start, char *name, int age)
   }
   else
   {
-    if(current_person == NULL || age < current_person->age)
+    if(current_person == NULL || age <= current_person->age)
     {
       new_person->next = start;
       start = new_person;
@@ -126,7 +126,7 @@ static person* insert_sorted(struct person** start, char *name, int age)
     }
     else
     {                      
-      while(current_person->next != NULL && age > current_person->next->age)
+      while(current_person->next != NULL && age >= current_person->next->age)
       {
         current_person = current_person->next; 
       }
