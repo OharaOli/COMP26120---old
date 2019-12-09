@@ -60,7 +60,7 @@ struct bstree* insert (Value_Type value, struct bstree* tree)
     tree->value = value;
     tree->left = NULL;
     tree->right = NULL;
-    tree->numberOfNodes = tree->numberOfNodes + 1;
+    //tree->numberOfNodes = tree->numberOfNodes + 1;
   }
   return tree;
 }
