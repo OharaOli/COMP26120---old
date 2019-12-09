@@ -41,23 +41,22 @@ struct bstree* insert (Value_Type value, struct bstree* tree)
   if(tree)
   {
     // TODO if tree is not NULL then insert into the correct sub-tree
-    if (value == tree->value)
+    if(compare(value, tree->value) < 0)
     {
-      return tree;
+      tree->left = insert(value, tree->left);
     }
-    else if(value > tree->value)
+    else if(compare(value, tree->value) > 0)
     {
       tree->right = insert(value, tree->right);
     }
     else
-    {
-      tree->left = insert(value, tree->left);
-    }
+    {}
   }
   else
   {
     // TODO otherwise create a new node containing the value
-    tree->value = value;
+    tree = (struct bstree*) malloc(sizeof(struct bstree));
+    tree->value = strdup(value);
     tree->left = NULL;
     tree->right = NULL;
     //tree->numberOfNodes = tree->numberOfNodes + 1;
@@ -70,13 +69,17 @@ bool find (Value_Type value, struct bstree* tree)
   if(tree)
   {
     //TODO complete the find function
-    if(value > tree->value)
+    if(compare(value, tree->value) < 0)
+    {
+      return find(value, tree->left);
+    }
+    else if(compare(value, tree->value) > 0)
     {
       return find(value, tree->right);
     }
     else
     {
-      return find(value, tree->left);
+      return true;
     }
   }
   // if tree is NULL then it contains no values
