@@ -15,10 +15,10 @@ int compare(Value_Type a, Value_Type b){
 }
 
 
-struct darray* initialize_set (int size)  
+struct darray* initialize_set (int size)
 {
 
-  struct darray* arr = malloc(sizeof(struct darray)); 
+  struct darray* arr = malloc(sizeof(struct darray));
   check(arr);
   arr->cells = (Value_Type*) (malloc(sizeof(Value_Type)*size));
   check(arr->cells);
@@ -58,7 +58,7 @@ struct darray* insert (Value_Type value, struct darray* arr)
   }
 
   arr->cells[arr->size] = strdup(value);
-  arr->size++; 
+  arr->size++;
 
   // changing the array means it may no longer be sorted
   arr->sorted = false;
@@ -68,10 +68,29 @@ struct darray* insert (Value_Type value, struct darray* arr)
 
 bool find (Value_Type value, struct darray* arr)
 {
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
   if(mode == LINEAR_SEARCH){
     //TODO implement linear search through arr->cells
-  }
-  else{ // Binary Search 
+
+    //Variable to track which element is being searched
+    int index;
+
+    //Loop through each element in turn checking it it the value
+    for(index = 0; index < (arr->size); index++)
+    {
+      if(strcmp(arr->cells[index], value) == 0)
+      {
+        return true;
+     } //if
+  } //for
+
+    //Return false is the value isn't found
+    return false;
+} //LINEAR_SEARCH
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  else{ // Binary Search
     if(!arr->sorted){
       if(verbose > 0){
         printf("Dynamic Array not sorted, sorting...\n");
@@ -82,9 +101,39 @@ bool find (Value_Type value, struct darray* arr)
       }
       arr->sorted = true;
     }
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
     //TODO implement binary search through arr->cells
 
-  }
+    //Initialise the low and high pointers to the bottom and top of the array
+    int leftIndex = 0;
+    int rightIndex = (arr->size);
+
+    //While the low pointer is lower then the higher pointer half the data set
+    while(leftIndex <= rightIndex)
+    {
+      //Find the middle value
+      int middleIndex = ((leftIndex + (rightIndex - 1)) / 2);
+      //Check if the value of the middle index is what we are looking for
+      if(strcmp(value, arr->cells[middleIndex]) == 0)
+      {
+         return true;
+      } //if
+      //If it isn't then move the left and right pointers as required
+      if(strcmp(value, arr->cells[middleIndex]) > 0)
+      {
+         leftIndex = middleIndex + 1;
+      } //if
+      else
+      {
+         rightIndex = middleIndex - 1;
+      } //else
+   } //while
+   //If the value isn't found then return false
+   return false;
+} //else (binary search)
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 }
 
 // You can make any changes you want to this function

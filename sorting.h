@@ -26,12 +26,12 @@ void selection_sort(struct darray* arr);
 // Recursive Sorting Algorithms
 
 // You must implement this one
-void quick_sort(struct darray* arr);
+void quick_sort(struct darray* arr, int low, int high);
 
 // We recommend implementing this one as it is a common
 // question in coding interviews and is an interesting case
 // for computing complexities
-void merge_sort(struct darray* arr);
+void merge(int arr[], int leftIndex, int middleIndex, int rightIndex);
 
 // See https://en.wikipedia.org/wiki/Timsort
 void tim_sort(struct darray* arr);
