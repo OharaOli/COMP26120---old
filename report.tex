@@ -134,10 +134,9 @@ Worst Case:
 The worst case scenario for this algorithm occurs when the partitions created are as unbalanced as possible (for example having only one element on the left side with the remaining data on the right). The original call take a constant time (c) for the number of elements in the array (n) and each successive call takes one less than this as one element will be in a partition on its own.
 \newline
 \begin{verbatim}
-        cn+c(n−1)+c(n−2)+⋯+2c=c(n+(n−1)+(n−2)+⋯+2)
-                          =c((n+1)(n/2)−1)
+        cn+c(n-1)+c(n-2)+...+2c=c(n+(n-1)+(n-2)+...+2)
+                               =c((n+1)(n/2)-1)
 \end{verbatim}
-\newline\newline
 Expanding this gives us an \begin{math}n^2\end{math} function, hence giving us a complexity of \begin{math}O(n^2)\end{math}.
 \newline\newline
 Average Case:
@@ -327,17 +326,39 @@ I have decided to test three sizes of dictionary:
   \item Medium - 1,000 elements
   \item Large - 10,000 elements
 \end{itemize}
-\newline\newline
 I have decided to test three methods of structuring the dictionary:
 \begin{itemize}
   \item Random
   \item Sorted (in order)
   \item Sorted (reverse order)
 \end{itemize}
-\newline\newline
 
 
 \subsection{Experimental Results}
+
+
+
+\begin{center}
+\begin{tabular}{ c c c c c c c c c c }
+  & S & M & L & S & M & L & S & M & L \\ 
+ Linear Search      & 0.003s & 0.008s & 2.807s & 0.002s & 0.016s & 3.211s & 0.002s & 0.0014s & 2.111s \\  
+ Binary (Insertion) & 0.002s & 0.011s & 2.983s & 0.002s & 0.021s & 4.524s & 0.001s & 0.0022s & 4.329s \\ 
+ Binary (Quick)     & 0.002s & 0.010s & 3.012s & 0.002s & 0.008s & 0.089s & 0.003s & 0.0014s & 2.452s \\
+ Binary (Bucket)    & --- & --- & --- & --- & --- & --- & --- & --- & --- \\
+ Binary (Merge)     & 0.002s & 0.006s & 0.067s & 0.001s & 0.016s & 0.045s & 0.002s & 0.0004s & 0.051s \\
+ Binary (Bubble)    & 0.003s & 0.012s & 3.837s & 0.002s & 0.021s & 4.769s & 0.003s & 0.0022s & 4.331s \\
+\end{tabular}
+\end{center}
+
+The results returned from the experiment that I conducted confirm the assumptions made about the relative complexities of the different algorithms.
+
+Notably, that the algorithms with the worst complexities (the bubble and insertion sorts with a complexity of \begin{math}O(n^2)\end{math}) performed dramatically worse than the other algorithms especially on larger data sets. 
+
+Similarly, the algorithms with the best complexities (the quick and merge sort with a complexity of \begin{math}O(nlog(n))\end{math}) perform considerably better than the other algorithms. 
+
+Due to difficulties implementing the bucket sort algorithm I decided to leave the results out of the experiment, although we can use this experiment to estimate its usefulness.   
+
+
 
 
 % PART 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

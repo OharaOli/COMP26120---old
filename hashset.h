@@ -1,14 +1,14 @@
 // Giles Reger, 2019
 
-#include <stdbool.h> 
+#include <stdbool.h>
 
-enum HashingModes { HASH_1_LINEAR_PROBING=0, 
-                    HASH_1_QUADRATIC_PROBING=1, 
-                    HASH_1_DOUBLE_HASHING=2, 
+enum HashingModes { HASH_1_LINEAR_PROBING=0,
+                    HASH_1_QUADRATIC_PROBING=1,
+                    HASH_1_DOUBLE_HASHING=2,
                     HASH_1_SEPARATE_CHAINING=3,
-                    HASH_2_LINEAR_PROBING=4, 
-                    HASH_2_QUADRATIC_PROBING=5, 
-                    HASH_2_DOUBLE_HASHING=6, 
+                    HASH_2_LINEAR_PROBING=4,
+                    HASH_2_QUADRATIC_PROBING=5,
+                    HASH_2_DOUBLE_HASHING=6,
                     HASH_2_SEPARATE_CHAINING=7};
 
 typedef char* Value_Type;
@@ -22,23 +22,29 @@ typedef struct
 { // hash-table entry
   Value_Type element; // only data is the key itself
   enum {empty, in_use, deleted} state;
+  struct cell *next;
 } cell;
 
 
-struct  hashset
+struct hashset
 {
-  cell *cells; 
-  int size; 
-  int num_entries; // number of cells in_use
+  cell *cells;
+  int size;
+  int num_entries;
   //TODO add anything else that you need
+  int resizes;
+  int secondDimensionSize;
+  float loadFactor;
+  float loadThreshold;
 };
 
-struct hashset* initialize_set (int size);     
-void tidy (struct hashset*); 
+struct hashset* initialize_set (int size);
+void tidy (struct hashset*);
 
 int size(struct hashset*);
 
 struct hashset* insert (Value_Type, struct hashset*);
+int hash (Value_Type value, struct hashset* set, int mode);
 
 bool find (Value_Type, struct hashset*);
 

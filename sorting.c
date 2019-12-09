@@ -126,8 +126,10 @@ void merge(int arr[], int leftIndex, int middleIndex, int rightIndex)
     int rightArraySize =  rightIndex - middleIndex;
 
     //Create two temporary arrays for each half
-    int leftArray[leftArraySize];
-    int rightArray[rightArraySize];
+    Value_Type *leftArray = malloc(leftArraySize * sizeof(Value_Type));
+    Value_Type *rightArray = malloc(rightArraySize * sizeof(Value_Type));
+    leftArray[leftArraySize];
+    rightArray[rightArraySize];
 
     //Copy the data to these temporary variables
     for (int i = 0; i < leftArraySize; i++)
@@ -195,13 +197,13 @@ void merge_sort(struct darray* arr, int leftIndex, int rightIndex)
 ////////////////////////////////////////////////////////////////////////////////
 void bubble_sort(struct darray* arr)
 {
-  for (int i = 0; i < arr->size - 1; ++i)
+  for(int i = 0; i < arr->size; i++)
   {
-    for (int k = 0; k < arr->size - i - 1; ++k)
+    for(int k = 0; k < arr->size - i - 1; k++)
     {
-      if (arr->cells[k] > arr->cells[k + 1])
+      if(compare(arr->cells[k], arr->cells[k + 1]) > 0)
       {
-        int swapValue = arr->cells[k];
+        Value_Type swapValue = arr->cells[k];
         arr->cells[k] = arr->cells[k + 1];
         arr->cells[k + 1] = swapValue;
       } //if

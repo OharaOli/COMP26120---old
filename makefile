@@ -4,18 +4,18 @@ CC=gcc
 
 # "make darray", "make bstree" or "make hash" to compile your code
 
-darray: 
-	$(CC) $(CFLAGS) -DDARRAY $(LDFLAGS) global.c speller.c darray.c sorting.c -o speller_darray 
+darray:
+	$(CC) $(CFLAGS) -DDARRAY $(LDFLAGS) global.c speller.c darray.c sorting.c -o speller_darray
 
 bstree:
 	$(CC) $(CFLAGS) -DBSTREE $(LDFLAGS) global.c speller.c bstree.c -o speller_bstree
 
-hash: 
+hash:
 	$(CC) $(CFLAGS) -DHASH $(LDFLAGS) global.c speller.c hashset.c -o speller_hash
 
 
 tidy:
-	-rm *.o speller_darray speller_bstree speller_hash 
+	-rm *.o speller_darray speller_bstree speller_hash
 
 .PHONY: darray bstree hash
 
@@ -28,9 +28,9 @@ RUN=valgrind
 
 # to test: e.g. "make testdarray"
 
-MODE=-m 0
+MODE=-m 6
 
-testdarray: darray 
+testdarray: darray
 	$(RUN) ./speller_darray -d data/sample-dictionary -vvv $(MODE) data/sample-file
 
 # small dictionaries that give trees that are unbalanced in various ways
@@ -46,4 +46,3 @@ testhash: hash
 	$(RUN) ./speller_hash -d data/sample-dictionary -s 13 $(MODE) -vv data/sample-file
 	@echo "This mightd fail as the dictionary is bigger than the hashtable"
 	$(RUN) ./speller_hash -d data/sample-dictionary -s 5 $(MODE) -vvv data/sample-file
-
