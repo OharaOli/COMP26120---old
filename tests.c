@@ -44,7 +44,7 @@ void run_test0(){
 }
 
 // Check that two elements with the same priority are popped in the right order
-/*
+
 void run_test1(){
   printf("TEST 1\n");
   PriorityQueue queue = initialize_pq(10);
@@ -65,40 +65,25 @@ void run_test1(){
   printf("Queue now empty\n");
   tidy(queue);
 }
-*/
-// Check "is_empty" on an empty queue
-void run_test1(){
-  printf("TEST 1\n");
-  PriorityQueue queue = initialize_pq(10);
-  printf("Initialised an empty queue...\n");
-  assert(1,is_empty(queue)," queue is meant to be empty");
-  printf("Queue now empty\n");
-  tidy(queue);
-}
 
-// Check "is_empty" on a non-empty queue
+// Check "is_empty" on an empty queue
 void run_test2(){
   printf("TEST 2\n");
   PriorityQueue queue = initialize_pq(10);
-  insert(queue,"hello",1);
-  printf("Inserted hello with priority 1...\n");
   printf("Initialised an empty queue...\n");
-  assert(2,!(is_empty(queue))," queue is not meant to be empty");
-  check_result(2,"hello",pop_min(queue));
-  printf("Popped hello...\n");
   assert(2,is_empty(queue)," queue is meant to be empty");
   printf("Queue now empty\n");
   tidy(queue);
 }
 
-// Check "contains" for a present item
+// Check "is_empty" on a non-empty queue
 void run_test3(){
   printf("TEST 3\n");
   PriorityQueue queue = initialize_pq(10);
-  printf("Initialised...\n");
   insert(queue,"hello",1);
   printf("Inserted hello with priority 1...\n");
-  assert(3,contains(queue,"hello",1)," queue should contain hello with priority 1");
+  printf("Initialised an empty queue...\n");
+  assert(3,!(is_empty(queue))," queue is not meant to be empty");
   check_result(3,"hello",pop_min(queue));
   printf("Popped hello...\n");
   assert(3,is_empty(queue)," queue is meant to be empty");
@@ -106,14 +91,14 @@ void run_test3(){
   tidy(queue);
 }
 
-// Check "contains" for an item that isn't present
+// Check "contains" for a present item
 void run_test4(){
-  printf("TEST 5\n");
+  printf("TEST 4\n");
   PriorityQueue queue = initialize_pq(10);
   printf("Initialised...\n");
   insert(queue,"hello",1);
   printf("Inserted hello with priority 1...\n");
-  assert(4,!(contains(queue,"goodbye",2))," queue shouldn't contain goodbye with priority 2");
+  assert(4,contains(queue,"hello",1)," queue should contain hello with priority 1");
   check_result(4,"hello",pop_min(queue));
   printf("Popped hello...\n");
   assert(4,is_empty(queue)," queue is meant to be empty");
@@ -121,17 +106,32 @@ void run_test4(){
   tidy(queue);
 }
 
-// Check "contains" for an item with a different key
+// Check "contains" for an item that isn't present
 void run_test5(){
   printf("TEST 5\n");
   PriorityQueue queue = initialize_pq(10);
   printf("Initialised...\n");
   insert(queue,"hello",1);
   printf("Inserted hello with priority 1...\n");
-  assert(5,!(contains(queue,"hello",2))," queue shouldn't contain goodbye with priority 2");
+  assert(5,!(contains(queue,"goodbye",2))," queue shouldn't contain goodbye with priority 2");
   check_result(5,"hello",pop_min(queue));
   printf("Popped hello...\n");
   assert(5,is_empty(queue)," queue is meant to be empty");
+  printf("Queue now empty\n");
+  tidy(queue);
+}
+
+// Check "contains" for an item with a different key
+void run_test6(){
+  printf("TEST 6\n");
+  PriorityQueue queue = initialize_pq(10);
+  printf("Initialised...\n");
+  insert(queue,"hello",1);
+  printf("Inserted hello with priority 1...\n");
+  assert(6,!(contains(queue,"hello",2))," queue shouldn't contain goodbye with priority 2");
+  check_result(6,"hello",pop_min(queue));
+  printf("Popped hello...\n");
+  assert(6,is_empty(queue)," queue is meant to be empty");
   printf("Queue now empty\n");
   tidy(queue);
 }
