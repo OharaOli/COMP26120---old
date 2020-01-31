@@ -37,5 +37,8 @@ Skip List...
 Using the information above we need a data structure with a low complexity for inserting and popping to implement the sorting application. Using this logic we should use a linked list for the sorting application.
 Following the same logic, we should use a data structure with a low complexity for contains, insterting and particularly popping. This suggests that a skip list should be used.
 
+Conclusion:
+Although I was not able to complete the skip list (which made testing difficult), I could use the data from COMPJUDGE and the given tests to evaluate my predictions on both the AVL tree and binary heap. It is clear that for sorting the binary heap is more efficient (1.9s compared to 0.8s), this matches my predictions for the complexity of these operations given above. Due to the nature of the linked list in skip lists, I predict that this may take the longest of the three for these tests although because I was not able to finish it I cannot confirm this. 
+
 
  
