@@ -89,7 +89,8 @@ struct node* search(struct skiplist* slist, int priority, struct node** updates)
     // priority is less than (or equal to) the priority we
     // are searching for. (Hint: the next node at this leve is
     // currently in node->next[level])
-    while(node->priority > node->next[level]->priority)
+    while(node->priority > node->next[level]->priority
+          && node->next[level] != NULL)
     {
       node = node->next[level];
     }
@@ -108,14 +109,19 @@ void insert(struct skiplist* slist, Value_Type value, int priority){
   struct node* updates[MAX_LEVEL];
   struct node* insert_at = search(slist,priority,updates);
 
-  //temp
-  int level = 0;
-
   // TODO create a new_node with a random number of levels
   // where the chance of having n levels is 1/2^n e.g. flip
   // a coin for each level. (Hint: use rand())
+  int level = 0;
+  int i = rand() % 2;
 
-  struct node* new_node = 0;
+  while(i != 0)
+  {
+     i = rand() % 2;
+     level++;
+  }
+
+  struct node* new_node = make_node(value, priority, level);
 
   for(int i=0;i<level;i++){
     new_node->next[i] = updates[i]->next[i];
