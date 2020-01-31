@@ -149,6 +149,9 @@ Value_Type pop_min(struct skiplist* slist){
  // TODO what do we need to do to repair the Skip List
  // to remove the min node? (Hint: what is pointing to min
  // and where should that point?)
+ // The sentinel node will be pointing to the minimum and this should now be
+ // pointing to what the minimum is pointing to
+
 
  free(min->next);
  free(min);
