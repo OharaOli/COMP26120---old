@@ -54,9 +54,9 @@ void run_test1(){
   printf("Inserted goodbye with priority 1...\n");
   insert(queue,"farewell",2);
   printf("Inserted farewell with priority 2...\n");
-  check_result(1,"hello",pop_min(queue));
-  printf("Popped hello...\n");
   check_result(1,"goodbye",pop_min(queue));
+  printf("Popped hello...\n");
+  check_result(1,"hello",pop_min(queue));
   printf("Popped goodbye...\n");
   check_result(1,"farewell",pop_min(queue));
   printf("Popped farewell...\n");
