@@ -83,7 +83,7 @@ void sift_up(struct binaryHeap *pq, int i) {
          return;
      }
      // i = parent?
-     i = p;
+     //i = p;
    }
 }
 
@@ -146,7 +146,7 @@ void expand(struct binaryHeap *pq)
 int last_idx(struct binaryHeap  *pq) {
     // TODO the last is only 0 at the very start
     //      fix this to set last to the last index of pq
-    int last = 0;
+    int last = (pq->heap_size);
     // if we ever query outside the heap just expand it
     if(last >= pq->num_elem){
       expand(pq);
@@ -160,6 +160,7 @@ void insert(struct binaryHeap *pq, Value_Type u, int w) {
     pq->elements[li]=u;
 
     //TODO there is something missing here, put it back
+    sift_up(pq, li);
 
     pq->heap_size++;
 }

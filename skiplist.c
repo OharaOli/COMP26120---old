@@ -11,7 +11,7 @@
 #include "pq.h"
 
 // This will have a large impact on performance, try playing with it
-#define MAX_LEVEL 20 
+#define MAX_LEVEL 20
 
 
 struct node {
@@ -47,14 +47,14 @@ struct skiplist* initialize_pq (int size){
   struct skiplist* slist = malloc(sizeof(struct skiplist));
   check(slist);
   slist->levels = 1;
-  slist->size = 0; 
-  // We will actually use the same sentinel node for start and end 
+  slist->size = 0;
+  // We will actually use the same sentinel node for start and end
   slist->header= make_node(NULL,INT_MAX,MAX_LEVEL);
   for(int i=0; i<MAX_LEVEL; i++){
     slist->header->next[i] = slist->header;
   }
   return slist;
-}     
+}
 
 void tidy (struct skiplist* list){
   struct node* next = list->header->next[0];
@@ -74,7 +74,7 @@ bool is_empty(struct skiplist* slist){
 }
 
 // Returns the last node with priority less than or equal to 'priority'
-// (In the presence of duplicates we could return the first node in the case of equals) 
+// (In the presence of duplicates we could return the first node in the case of equals)
 // Records in 'updates' the nodes along the path that would need updating if a node to
 // their right on their level were to be inserted e.g. the nodes at which the decision
 // to go 'down' is made
@@ -89,9 +89,13 @@ struct node* search(struct skiplist* slist, int priority, struct node** updates)
     // priority is less than (or equal to) the priority we
     // are searching for. (Hint: the next node at this leve is
     // currently in node->next[level])
-    
+
+
     // Record the node where we go down at a particular level
-    if(updates){updates[level]=node;}
+    if(updates)
+    {
+      updates[level]=node;
+    }
   }
   return node;
 }
@@ -103,9 +107,9 @@ void insert(struct skiplist* slist, Value_Type value, int priority){
 
   // TODO create a new_node with a random number of levels
   // where the chance of having n levels is 1/2^n e.g. flip
-  // a coin for each level. (Hint: use rand()) 
+  // a coin for each level. (Hint: use rand())
 
-  struct node* new_node = 0; 
+  struct node* new_node = 0;
 
   for(int i=0;i<levels;i++){
     new_node->next[i] = updates[i]->next[i];
@@ -136,7 +140,7 @@ Value_Type pop_min(struct skiplist* slist){
 
  free(min->next);
  free(min);
- 
+
  slist->size--;
 
  return res;
@@ -152,4 +156,3 @@ void print(struct skiplist* list){
   }
   while(node != list->header);
 }
-
