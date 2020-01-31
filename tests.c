@@ -43,9 +43,24 @@ void run_test0(){
   tidy(queue);
 }
 
-// Check that two elements with the same priority are popped in the right order
-
 void run_test1(){
+  printf("TEST 1\n");
+  PriorityQueue queue = initialize_pq(10);
+  printf("Initialised...\n");
+  insert(queue,"hello",1);
+  printf("Inserted hello with priority 1...\n");
+  insert(queue,"goodbye",2);
+  printf("Inserted goodbye with priority 2...\n");
+  check_result(1,"hello",pop_min(queue));
+  printf("Popped hello...\n");
+  check_result(1,"goodbye",pop_min(queue));
+  printf("Popped goodbye...\n");
+  assert(1,is_empty(queue)," queue is meant to be empty");
+  printf("Queue now empty\n");
+  tidy(queue);
+}
+// Check that two elements with the same priority are popped in the right order
+/*void run_test1(){
   printf("TEST 1\n");
   PriorityQueue queue = initialize_pq(10);
   printf("Initialised...\n");
@@ -65,7 +80,7 @@ void run_test1(){
   printf("Queue now empty\n");
   tidy(queue);
 }
-
+*/
 // Check "is_empty" on an empty queue
 void run_test2(){
   printf("TEST 2\n");

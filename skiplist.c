@@ -108,13 +108,16 @@ void insert(struct skiplist* slist, Value_Type value, int priority){
   struct node* updates[MAX_LEVEL];
   struct node* insert_at = search(slist,priority,updates);
 
+  //temp
+  int level = 0;
+
   // TODO create a new_node with a random number of levels
   // where the chance of having n levels is 1/2^n e.g. flip
   // a coin for each level. (Hint: use rand())
 
   struct node* new_node = 0;
 
-  for(int i=0;i<levels;i++){
+  for(int i=0;i<level;i++){
     new_node->next[i] = updates[i]->next[i];
     updates[i]->next[i] = new_node;
   }
