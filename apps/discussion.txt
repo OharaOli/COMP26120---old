@@ -1,0 +1,41 @@
+1: 
+Sorting will insert as many time as there are elements to be sorted, similarly with popping. There may also be this many calls to "is_empty" depending on the how the algorithm is made (may be used to verify that a pop is not being done from an empty queue).
+String search will concatentate to give a number of strings that we will call "n". Each time a string is constructed it will need to be inserted and "contains" will need to be called to check whether the constructed string is that one that we are attempting to construct. For each constructed string we will need to pop two smaller strings in order to create the new word. 
+
+2: 
+Linked List...
+	insert(k,e) 	- O(1) 
+ 	pop_min()	- O(1)
+	is_empty	- O(1)
+	contains(k,e)	- O(n)
+
+Sorted Linked List...
+	insert(k,e) 	- O(n) 
+ 	pop_min()	- O(1)
+	is_empty	- O(1)
+	contains(k,e)	- O(log(n))
+
+AVL Tree...
+	insert(k,e) 	- O(log(n)) 
+ 	pop_min()	- O(log(n)) 
+	is_empty	- O(1) 
+	contains(k,e)	- O(log(n)) 
+
+Binary Heap...
+	insert(k,e) 	- O(1) 
+ 	pop_min()	- O(log(n))
+	is_empty	- O(1)
+	contains(k,e)	- O(n)
+
+Skip List...
+	insert(k,e) 	- O(log(n))  
+ 	pop_min()	- O(1)
+	is_empty	- O(1)
+	contains(k,e)	- O(log(n))
+
+3:
+Using the information above we need a data structure with a low complexity for inserting and popping to implement the sorting application. Using this logic we should use a linked list for the sorting application.
+Following the same logic, we should use a data structure with a low complexity for contains, insterting and particularly popping. This suggests that a skip list should be used.
+
+
+ 

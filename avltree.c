@@ -61,7 +61,7 @@ void checkHeightBalanceProperty(struct avltree* tree)
 }
 
 
-struct avltree* initialize_pq (int size) 
+struct avltree* initialize_pq (int size)
 {
   // An empty tree is represented by node with NULL
   // value. Cannot insert NULL into tree. Assumes
@@ -119,7 +119,17 @@ struct avltree* rightRotate(struct avltree* node)
 struct avltree* leftRotate(struct avltree* node)
 {
   // TODO implement a left rotation
-  return 0;
+  // Perform the rotation
+  struct avltree* l = node->right;
+  node->right = l->left;
+  l->left = node;
+
+  // Update depths
+  node->depth = max(height(node->right), height(node->left)) + 1;
+  l->depth = max(height(l->right), node->depth) + 1;
+
+  // Return the new root
+  return l;
 }
 
 int getBalance(struct avltree* node)
@@ -133,7 +143,7 @@ struct avltree* rebalance(struct avltree* tree){
 
     int parentBalance = getBalance(tree);
 
-    if (parentBalance == -2){ // left child updated 
+    if (parentBalance == -2){ // left child updated
       if(getBalance(tree->left) <= 0){
         //printf("Case Right\n");
         return rightRotate(tree);
@@ -144,9 +154,18 @@ struct avltree* rebalance(struct avltree* tree){
         return rightRotate(tree);
       }
     }
-    if (parentBalance == 2){ // right child updated 
+    if (parentBalance == 2){ // right child updated
       // TODO implement the case where the right child has been updated
-      //      using your new leftRotate function
+      // using your new leftRotate function
+        if(getBalance(tree->right) >= 0){
+        //printf("Case Right\n");
+        return leftRotate(tree);
+      }
+      else{
+        //printf("Case RightLeft\n");
+        tree->right =  rightRotate(tree->right);
+        return leftRotate(tree);
+      }
     }
 
     //printf("No change\n");
@@ -158,7 +177,7 @@ struct avltree* insert_inner (struct avltree* tree, Value_Type value, int priori
   if(tree){
     if(tree->priority > priority){ tree->left = insert_inner(tree->left,value,priority); }
     else { tree->right = insert_inner(tree->right,value,priority); }
-    // This implementation allows duplicates 
+    // This implementation allows duplicates
 
     tree->depth = max(height(tree->left), height(tree->right)) + 1;
 
@@ -166,7 +185,7 @@ struct avltree* insert_inner (struct avltree* tree, Value_Type value, int priori
   }
   else{
     //otherwise create a new node containing the value
-    tree = initialize_pq(0); 
+    tree = initialize_pq(0);
     tree->value= value;
     tree->priority=priority;
   }
@@ -229,7 +248,7 @@ Value_Type pop_min_inner(struct avltree* tree, struct avltree* parent){
         parent->left=NULL;
       }
       free(tree);
-    }  
+    }
 
     return res;
   }
@@ -261,7 +280,7 @@ void print_recursive(struct avltree* tree, int depth)
     print_recursive(tree->right,depth+1);
   }
   else printf("(NULL,-,0)\n");
-} 
+}
 // You can update this if you want
 void print(struct avltree* tree)
 {
@@ -271,5 +290,3 @@ void print(struct avltree* tree)
  }
  else print_recursive(tree,0);
 }
-
-

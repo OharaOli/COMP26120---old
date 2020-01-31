@@ -1,6 +1,6 @@
 CFLAGS=-g -Wall -std=c99
 LDFLAGS=
-CC=gcc
+CC=gcc $(CFLAGS)
 PQ_FLAG=NONE
 IMP_FLAG=none
 
@@ -30,7 +30,7 @@ endif
 # For Part 1a, make tests_<imp> e.g. "make tests_llist1"
 
 tests_%: phony
-	$(CC) $(LDFLAGS) -D$(PQ_FLAG) tests.c $(IMP_FLAG).c global.c -o $@ 
+	$(CC) $(LDFLAGS) -D$(PQ_FLAG) tests.c $(IMP_FLAG).c global.c -o $@
 
 # For Part1a, to run tests, make run_tests_<imp> e.g. "make run_tests_llst1"
 
@@ -39,13 +39,13 @@ run_tests_%:
 	  ./tests_$(IMP_FLAG) $$number ; \
 	done
 
-# For Part 2, make "<app>_<imp>" e.g. "make sorting_binaryheap" 
+# For Part 2, make "<app>_<imp>" e.g. "make sorting_binaryheap"
 
 sorting_%: phony
-	$(CC) $(LDFLAGS) -D$(PQ_FLAG) apps/sorting.c $(IMP_FLAG).c global.c -o $@ 
+	$(CC) $(LDFLAGS) -D$(PQ_FLAG) apps/sorting.c $(IMP_FLAG).c global.c -o $@
 
 concat_%: phony
-	$(CC) $(LDFLAGS) -D$(PQ_FLAG) apps/concat_finder.c $(IMP_FLAG).c global.c -o $@ 
+	$(CC) $(LDFLAGS) -D$(PQ_FLAG) apps/concat_finder.c $(IMP_FLAG).c global.c -o $@
 
 # For Part2, you can use, e.g., run_sorting_all to time the results of different compiled implementations
 # and you can use, e.g., run_sorting_llist1 to see the results of running a particular implementation
@@ -75,11 +75,10 @@ run_concat_%:
 
 # For tidying up
 tidy:
-	-rm *.o 
+	-rm *.o
 
 # This is a hack to use PHONY along with implicit targets
 # Including a dependency on phony ensures that the target always
 # gets recompiled
 phony:
-.PHONY: phony 
-
+.PHONY: phony

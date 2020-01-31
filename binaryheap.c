@@ -18,15 +18,15 @@ struct binaryHeap {
 // 0-based operations
 // This could be updated to be 1-based if you wanted, what else would need to change?
 #define FIRST 0
-int parent(int i) {return (i-1)/2;} 
-int left(int i) {return (2*i) + 1; } 
-int right(int i) {return (2*i) + 2; } 
+int parent(int i) {return (i-1)/2;}
+int left(int i) {return (2*i) + 1; }
+int right(int i) {return (2*i) + 2; }
 
 
 struct binaryHeap* initialize_pq(int size){
     struct binaryHeap* pq = malloc(sizeof(struct binaryHeap));
     check(pq);
-    pq->num_elem = size; 
+    pq->num_elem = size;
     pq->heap_size=0;
     pq->weights = malloc(sizeof(int)*size);
     check(pq->weights);
@@ -35,7 +35,7 @@ struct binaryHeap* initialize_pq(int size){
     return pq;
 }
 
-void tidy(struct binaryHeap* pq){ 
+void tidy(struct binaryHeap* pq){
     free(pq->elements);
     free(pq->weights);
     free(pq);
@@ -56,6 +56,35 @@ void swap(struct binaryHeap *pq, int i, int j) {
 
 void sift_up(struct binaryHeap *pq, int i) {
    // TODO implement sift_up (also known as bubble-up and other things)
+   // p = parent
+   // i = thing to be added (used in swap)
+   // weights = key (sorted on this)
+   while(true)
+   {
+     // find the parent node
+     int p = parent(i);
+     // check if the parent node is the root
+     if(p == 0)
+     {
+      // root node
+      if(pq->weights[p] > pq->weights[i])
+      {
+         // swap the parent and the node
+         swap(pq,i,p);
+      }
+      return;
+     }
+     if(pq->weights[p] > pq->weights[i]){
+         swap(pq,i,p);
+     }
+     else
+     {
+         // parent smaller, we're finished
+         return;
+     }
+     // i = parent?
+     i = p;
+   }
 }
 
 void sift_down(struct binaryHeap *pq, int i) {
@@ -66,13 +95,16 @@ void sift_down(struct binaryHeap *pq, int i) {
       if(l >= pq->heap_size && r >= pq->heap_size){
         // no children, we're finished
         return;
-      } 
+      }
       int smallest = l;
-      if(r < pq->heap_size && pq->weights[r] < pq->weights[l]){ smallest=r;}
-
-      if(pq->weights[smallest] < pq->weights[i]){ 
+      //if right is smaller than left use this as smallest instead of left
+      if(r < pq->heap_size && pq->weights[r] < pq->weights[l]){
+         smallest=r;
+      }
+      //comparison and swap
+      if(pq->weights[smallest] < pq->weights[i]){
         swap(pq,i,smallest);
-      } 
+      }
       else{
         // children not smaller, we're finished
         return;
@@ -155,4 +187,3 @@ void print(struct binaryHeap *pq){
     printf("(%s,%d)\n",pq->elements[i], pq->weights[i]);
   }
 }
-
