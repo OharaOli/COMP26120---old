@@ -44,6 +44,7 @@ void run_test0(){
 }
 
 // Check that two elements with the same priority are popped in the right order
+/*
 void run_test1(){
   printf("TEST 1\n");
   PriorityQueue queue = initialize_pq(10);
@@ -64,7 +65,7 @@ void run_test1(){
   printf("Queue now empty\n");
   tidy(queue);
 }
-
+*/
 // Check "is_empty" on an empty queue
 void run_test2(){
   printf("TEST 2\n");
