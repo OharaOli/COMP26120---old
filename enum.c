@@ -59,19 +59,35 @@ void enumerate()
 
       /* ADD CODE IN HERE TO KEEP TRACK OF FRACTION OF ENUMERATION DONE */
 
-          // calculates the value and weight and feasibility:
-      infeasible=check_evaluate_and_print_sol(solution, &total_value, &total_weight);  
+      // calculates the value and weight and feasibility:
+      infeasible=check_evaluate_and_print_sol(solution, &total_value, &total_weight);
+
       /* ADD CODE IN HERE TO KEEP TRACK OF BEST SOLUTION FOUND*/
 
-    }
- /* ADD CODE TO PRINT OUT BEST SOLUTION */
+      // If the solution is feasible then we can check if it has a greater total value
+      if (infeasible == 0)
+      {
+         //If the total value is greater than the current best value then set current solution as the best solution
+         if (total_value > best_value)
+         {
+            best_value = total_value;
+            best_solution = solution;
+         } //if
+      } //if
 
+   } //while
+
+/* ADD CODE TO PRINT OUT BEST SOLUTION */
+
+// Print out the best solution
+QUIET = 0;
+infeasible = check_evaluate_and_print_sol(best_solution, &total_value, &total_weight);
 }
 
 
 int next_binary(int *str, int Nitems)
 {
-  // Called with a binary string of length Nitems, this 
+  // Called with a binary string of length Nitems, this
   // function adds "1" to the string, e.g. 0001 would turn to 0010.
   // If the string overflows, then the function returns 1, else it returns 0.
   int i=Nitems-1;
