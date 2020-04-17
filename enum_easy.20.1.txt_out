@@ -1,0 +1,43 @@
+item	W	V
+1	37	39
+2	7	48
+3	43	3
+4	24	3
+5	9	49
+6	13	12
+7	30	3
+8	31	21
+9	8	2
+10	49	18
+11	49	40
+12	46	38
+13	45	32
+14	15	47
+15	28	12
+16	36	11
+17	16	21
+18	37	33
+19	34	16
+20	41	39
+296
+
+Progress: 6.67%
+Progress: 13.33%
+Progress: 20.00%
+Progress: 26.67%
+Progress: 33.33%
+Progress: 40.00%
+Progress: 46.67%
+Progress: 53.33%
+Progress: 60.00%
+Progress: 66.67%
+Progress: 73.33%
+Progress: 80.00%
+Progress: 86.67%
+Progress: 93.33%
+Progress: 100.00%
+
+Best solution...
+Pack items: 1 2 5 8 9 11 12 14 17 18 20 
+value=377 weight=296 <= Capacity=296: Feasible
+Optimal value = 377

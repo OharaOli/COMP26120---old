@@ -38,6 +38,10 @@ void enumerate()
   // For each solution vector, its value and weight is calculated.
 
 
+  int currentWatchBit = 0; // the bit monitored to create the counter
+  int iterations = 0; // number of iterations completed
+  float totalIterations = 15.0; // total number of iterations to be completed
+  int loop; // item index
   int i;  // item index
   int solution[Nitems+1];   // (binary) solution vector representing items packed
   int best_solution[Nitems+1];  // (binary) solution vector for best solution found
@@ -45,6 +49,8 @@ void enumerate()
   double j=0;
   int total_value, total_weight; // total value and total weight of current knapsack solution
   int infeasible;  // 0 means feasible; -1 means infeasible (violates the capacity constraint)
+  //char progressBarDone = "|";
+  //char progressBarNotDone = "               ";
 
   // set the knapsack initially empty
   for(i=1;i<=Nitems;i++)
@@ -54,10 +60,24 @@ void enumerate()
   QUIET=1;
   best_value=0;
 
+
  while(!(next_binary(&solution[1], Nitems)))
     {
-
       /* ADD CODE IN HERE TO KEEP TRACK OF FRACTION OF ENUMERATION DONE */
+      if (currentWatchBit == 0 && solution[4] == 1)
+      {
+         currentWatchBit = 1;
+         iterations++;
+         // Update the progress bar
+         printf("\nProgress: %.2f%%", ((iterations/totalIterations)*100));
+      }
+      else if (currentWatchBit == 1 && solution[4] == 0)
+      {
+         currentWatchBit = 0;
+         iterations++;
+         // Update the progress bar
+         printf("\nProgress: %.2f%%", ((iterations/totalIterations)*100));
+      }
 
       // calculates the value and weight and feasibility:
       infeasible=check_evaluate_and_print_sol(solution, &total_value, &total_weight);
@@ -71,17 +91,23 @@ void enumerate()
          if (total_value > best_value)
          {
             best_value = total_value;
-            best_solution = solution;
+            for (loop = 1; loop <= Nitems; loop++)
+            {
+               best_solution[loop] = solution[loop];
+            } //for
+
          } //if
       } //if
-
    } //while
 
 /* ADD CODE TO PRINT OUT BEST SOLUTION */
 
 // Print out the best solution
+printf("\n");
+printf("\nBest solution...\n");
 QUIET = 0;
 infeasible = check_evaluate_and_print_sol(best_solution, &total_value, &total_weight);
+printf("Optimal value = %d\n", best_value);
 }
 
 

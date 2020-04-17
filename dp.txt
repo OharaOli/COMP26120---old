@@ -1,0 +1,16 @@
+Suitability of the 0/1 Knapsack Problem for dynamic programming...
+
+1. Simple Subproblems:
+For a 0/1 Knapsack problem the subproblems simply compose of either taking an
+item (1) or not (0) that is decided on an item by item basis.
+
+2. Subproblem Optimality:
+The maximum value excluding the final item (N-1) can be computed and then the
+final item (Nth item) can be included given that the weight is still below the
+given weight. In this way the optimal subproblem is used to give the final
+optimal solution.
+
+3. Subproblem Overlap
+We know that certain combinations of items will always give a weight that is
+greater than the maximum weight and we can also find optimum subproblems that
+will always give the best value for the given weight.  

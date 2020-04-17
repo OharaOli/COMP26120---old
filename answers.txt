@@ -1,0 +1,110 @@
+Task 3b:
+
+1. For large instances, you cannot use enumeration. Why? How large an instance
+   do you think you can solve on the lab PCs using enumeration?
+
+   For large instances you shouldn't use enumeration as this involves checking
+   every possible solution, calculating its weight and valuable. For a problem
+   size of "n" items, this results in 2^n solutions that need checking which
+   makes it unsuitable for large problem sizes. Assuming that evaluating a
+   single solution takes 1 microsecond, even a problem involving as few as 25
+   items takes just over 33 seconds. If this is increased to 30 items the time
+   taken to find the optimal solution increases to almost 18 minutes.
+
+
+2. Run the other three algorithms on the following knapsack problem instances
+   and note what happens.
+   (easy.200.4.txt, hard1.200.11.txt and hard1.200.01.txt)
+   Which instances does greedy solve optimally? Does dynamic programming work
+   on all instances, and why/why not? Does branch-and-bound come to a stop on
+   all instances?
+
+   Results from test.sh...
+
+   ===========================================
+   Running on easy.20.1.txt for 5 seconds
+   ===========================================
+
+   Algorithm |      Optimal Value       | Time Taken  | Result
+   ----------------------------------------------------------------
+   enum      | 377                      | 0m0.343s    | Yes
+   bnb       | 377                      | 0m0.006s    | Yes
+   dp        | 377                      | 0m0.006s    | Yes
+   greedy    | 368                      | 0m0.005s    | ?
+
+
+   ===========================================
+   Running on easy.200.4.txt for 5 seconds
+   ===========================================
+
+   Algorithm |      Optimal Value       | Time Taken  | Result
+   ----------------------------------------------------------------
+   enum      | -                        | 0m5.003s    | -
+   bnb       | 4077                     | 0m0.014s    | Yes
+   dp        | 4077                     | 0m0.020s    | Yes
+   greedy    | 4075                     | 0m0.005s    | ?
+
+
+   ===========================================
+   Running on hard1.200.11.txt for 60 seconds
+   ===========================================
+
+   Algorithm |      Optimal Value       | Time Taken  | Result
+   ----------------------------------------------------------------
+   enum      | -                        | 1m0.003s    | -
+   bnb       | -                        | 0m25.315s    | -
+   dp        | 126968                   | 0m0.323s    | Yes
+   greedy    | 126579                   | 0m0.006s    | ?
+
+
+   ===========================================
+   Running on hard1.200.01.txt for 60 seconds
+   ===========================================
+
+   Algorithm |      Optimal Value       | Time Taken  | Result
+   ----------------------------------------------------------------
+   enum      | -                        | 1m0.003s    | -
+   bnb       | -                        | 1m0.004s    | -
+   dp        | 1205259                  | 0m26.593s    | ?
+   greedy    | 1205167                  | 0m0.009s    | ?
+
+   The greedy algorithm failed to give the optimum value in all cases but always
+   finished and was the fastest algorithm to finish in all cases.
+   Dynamic programming gave an optimum value in all cases however it took over
+   26s for hard1.200.01 which is significantly longer than greedy. This is the
+   case as this is a 1/0 Knapsack problem with optimum subproblems with overlap.
+   Branch and bound didn't come to a stop on the hard text file but did come
+   to a stop on the easy examples in a short time taken.
+
+
+3. Can you explain WHY the hard1 instances are easy or hard (cause problems) for
+   (i) greedy, (ii) branch-and-bound and (iii) dynamic programming?
+
+   (i)   The increase in the number of items that could possibly fit in the bag
+         requires more overhead when it comes to calculating the value/weight
+         ratio as well as when sorting the items based on this value. The
+         process of filling the bag will also depend on the number of items as
+         it will check every item to see if it can fit in the remaining space.
+   (ii)  The branch and bound algorithm suffers as the number of items increases
+         because (despite not having to explore all branches), the addition of
+         each item requires at least one more branch to be created which in the
+         worst case can lead to exponential growth of branches. The calculations
+         that take place for each branch will also increase as the number of
+         items increases.
+   (iii) Dynamic programming isn't effected as much as branch and bound however
+         the "table" created is of size number of items * capacity and so an
+         increase in either will lead to an increase in the number of values
+         that will need calculating. As with branch and bound not all values
+         will need calculating. The increase in capacity is what sets apart the
+         easy and difficult tests for this algorithm.
+
+4. The airline has problems of size 500-2000 of similar type to the hard1 instances. Which
+   algorithm(s) do you recommend using and why? What should they do in case the
+   algorithm runs out of time?
+
+   According to the results above, for problems similar to that of the hard
+   problems given, dynamic programming is the best choice if the optimum value
+   is preferred over time to compute. If the airline company needs to compute
+   or update values constantly (e.g. if new items are added/removed frequently
+   or if the weights/value changes) then it would be preferable to use the
+   greedy algorithm despite it not always giving the best possible value. 

@@ -1,0 +1,10 @@
+Task 3a:
+
+The greedy algorithm may not always give an optimum value for the 0/1 Knapsack
+problem because it works on the basis of the best value/weight ratio which in
+turn relies on being able to select a fraction of an item to fill the remaining
+space in the bag. In a 0/1 Knapsack problem this cannot be done and so it may be
+the case that two items with a lower value/weight ratio may in fact give a
+better overall value as they fill more of the bag. This would not be spotted by
+the greedy algorithm, instead opting for a higher ratio value/weight that may
+leave more space in the bag. 
