@@ -35,6 +35,12 @@ unsigned long long fme(unsigned long long g, unsigned long long x, unsigned long
 {
    unsigned long long answer = 1;
 
+   g = g % p;
+   if (g == 0)
+   {
+      return 0;
+   }  
+
    while(x > 0)
    {
       // If x is odd then we can multiply with result (bitwise AND on last bit)
