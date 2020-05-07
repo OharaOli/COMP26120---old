@@ -61,7 +61,9 @@ unsigned long long imp(unsigned long long y, unsigned long long p)
    unsigned long long check = hcf(y, p);
    if (check != 1)
    {
+
       printf("\nInverse not possible for that input\n");
+      return -1;
    } //if
    else
    {
