@@ -213,7 +213,7 @@ int main(int argc, char *argv[])
        getPublicKey(p, g);
        break;
      case 'x':
-       break;
+       return(0);
      default:
        printf("\nInvalid input");
        break;
