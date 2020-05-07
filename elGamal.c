@@ -131,6 +131,10 @@ void encrypt(unsigned long p, unsigned long g)
 
 void decrypt(unsigned long p, unsigned long g)
 {
+   // String to hold the initial input for the encrypted message
+   char eMessage[100];
+   char *token1;
+   char *token2;
    // First part of the encrypted message (a) (entered by user)
    unsigned long a;
    // Second part of the encrypted message (b) (entered by user)
@@ -139,10 +143,21 @@ void decrypt(unsigned long p, unsigned long g)
    unsigned long x;
 
    printf("\n----------------------------------------");
-   printf("\nPlease enter the first part of the message: ");
-   scanf(" %lu", &a);
-   printf("\nPlease enter the second part of the message: ");
-   scanf(" %lu", &b);
+   //printf("\nPlease enter the first part of the message: ");
+   //scanf(" %lu", &a);
+   //printf("\nPlease enter the second part of the message: ");
+   //scanf(" %lu", &b);
+   printf("\nPlease enter the secret message: ");
+
+   scanf(" %s", &eMessage);
+   printf("\nEntered: %s", eMessage);
+   memmove(eMessage, eMessage+1, strlen(eMessage));
+   eMessage[strlen(eMessage)-1] = 0;
+   token1 = strtok(eMessage, ",");
+   token2 = strtok(NULL, ",");
+   a = strtoul(token1, NULL, 10);
+   b = strtoul(token2, NULL, 10);
+
    printf("\nPlease enter your private key: ");
    scanf(" %lu", &x);
 
@@ -165,31 +180,31 @@ int main(int argc, char *argv[])
   printf("\nPrimitive root wrt %lu is %lu", p, g);
 
   //Give the user a choice of functions and read input
-  int choice;
+  char choice;
   do{
   printf("\n----------------------------------------");
   printf("\nPlease select one of the following:");
-  printf("\n1: Encrypt");
-  printf("\n2: Decrypt");
-  printf("\n3: Get public key");
-  printf("\n0: Exit");
+  printf("\ne: Encrypt");
+  printf("\nd: Decrypt");
+  printf("\nk: Get public key");
+  printf("\nx: Exit");
   printf("\n----------------------------------------\n");
-  scanf("%d", &choice);
-
+  //scanf("%d", &choice);
+  scanf(" %c", &choice);
 
   // Branch to the correct function based on the input
   switch(choice)
   {
-     case 1:
+     case 'e':
        encrypt(p, g);
        break;
-     case 2:
+     case 'd':
        decrypt(p, g);
        break;
-     case 3:
+     case 'k':
        getPublicKey(p, g);
        break;
-     case 0:
+     case 'x':
        break;
      default:
        printf("\nInvalid input");
