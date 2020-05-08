@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
+#include <string.h>
 
 // Helper function from task 2
 // Compute the function g^x mod p
@@ -44,14 +45,9 @@ unsigned long long dl(unsigned long long y, unsigned long long g, unsigned long 
   int n = (int) sqrt(p) + 1;
   //int n = ceil(log2(doublep));
 
-  // If g is 24 we can return 31983
-  if (g == 24)
-  {
-     return 31983;
-  } //if  
-
   // Array to store modular exponentiation for each bit (not ordered)
   unsigned long long fmeValues[p];
+  memset(fmeValues,0,sizeof(fmeValues));
 
   // Calculate and store the values y^(n*i) (LHS of equatioln)
   int i;
